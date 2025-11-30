@@ -5,7 +5,7 @@
     Private _Telefono As String
     Private _FechaAlta As Date
     Private _SueldoBase As Single
-    Private _ModSueldo
+    Private _ModSueldo As Integer
 
     Public Property Nombre As String
         Get
@@ -68,11 +68,11 @@
             End If
 
             If (Not (String.IsNullOrWhiteSpace(_Nombre))) AndAlso Not (String.IsNullOrWhiteSpace(_Apellido1)) AndAlso Not (String.IsNullOrWhiteSpace(_Apellido2)) Then
-                Return _Apellido1 & ", " & _Apellido2 & " " & _Nombre
+                Return _Apellido1 & ", " & _Apellido2 & ", " & _Nombre
             End If
 
             If (Not (String.IsNullOrWhiteSpace(_Nombre))) AndAlso Not (String.IsNullOrWhiteSpace(_Apellido1)) AndAlso (String.IsNullOrWhiteSpace(_Apellido2)) Then
-                Return _Apellido1 & " " & _Nombre
+                Return _Apellido1 & ", " & _Nombre
             End If
 
             If (Not (String.IsNullOrWhiteSpace(_Nombre))) AndAlso (String.IsNullOrWhiteSpace(_Apellido1)) AndAlso (String.IsNullOrWhiteSpace(_Apellido2)) Then
@@ -80,11 +80,11 @@
             End If
 
             If (Not (String.IsNullOrWhiteSpace(_Nombre))) AndAlso (String.IsNullOrWhiteSpace(_Apellido1)) AndAlso Not (String.IsNullOrWhiteSpace(_Apellido2)) Then
-                Return _Apellido2 & " " & _Nombre
+                Return _Apellido2 & ", " & _Nombre
             End If
 
             If ((String.IsNullOrWhiteSpace(_Nombre))) AndAlso Not (String.IsNullOrWhiteSpace(_Apellido1)) AndAlso Not (String.IsNullOrWhiteSpace(_Apellido2)) Then
-                Return _Apellido1 & " " & _Apellido2
+                Return _Apellido1 & ", " & _Apellido2
             End If
 
             If ((String.IsNullOrWhiteSpace(_Nombre))) AndAlso Not (String.IsNullOrWhiteSpace(_Apellido1)) AndAlso (String.IsNullOrWhiteSpace(_Apellido2)) Then
@@ -118,8 +118,8 @@
     End Property
 
 
-    Public Property ModSueldo As Byte
-        Set(value As Byte)
+    Public Property ModSueldo As Integer
+        Set(value As Integer)
             _ModSueldo = value
         End Set
         Get

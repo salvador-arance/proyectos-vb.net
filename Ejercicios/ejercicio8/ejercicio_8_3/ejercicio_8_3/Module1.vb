@@ -28,7 +28,7 @@ Module Module1
                 Case 3
                     Opcion_3()
                 Case 4
-                    Opcion_4()
+                    Exit Sub
             End Select
         Loop
     End Sub
@@ -89,7 +89,7 @@ Module Module1
             Console.ResetColor()
 
             Do
-                Console.Write("Sueldo base (>0) ......:")
+                Console.Write("Sueldo base (>0) ......: ")
                 Console.ForegroundColor = ConsoleColor.Blue
                 entrada = Console.ReadLine()
                 If Not (Integer.TryParse(entrada, currelaAux.SueldoBase) AndAlso currelaAux.SueldoBase > 0) Then
@@ -102,13 +102,14 @@ Module Module1
             Console.ResetColor()
 
             Do
-                Console.Write("Fecha de alta (>0) ....:")
+                Console.Write("Fecha de alta (>0) ....: ")
                 Console.ForegroundColor = ConsoleColor.Blue
                 entrada = Console.ReadLine()
 
                 If Not (Date.TryParse(entrada, currelaAux.FechaAlta) AndAlso currelaAux.FechaAlta <= Today) Then
                     Console.ForegroundColor = ConsoleColor.Red
                     Console.WriteLine("No puede ser una fecha superior a la actual.")
+                    Console.ResetColor()
                 End If
             Loop While Not (Date.TryParse(entrada, currelaAux.FechaAlta) AndAlso currelaAux.FechaAlta <= Today)
 
@@ -148,8 +149,17 @@ Module Module1
     End Sub
 
     Private Sub Opcion_2()
+        Console.Clear()
+        Dim sueldoMax As Single
+        Dim sueldoMin As Single
 
-        HayCurrelas()
+        If currelantes.Length = 0 Then
+            Console.ForegroundColor = ConsoleColor.Red
+            Console.Write("No has introducido datos de nadie.")
+            Console.ResetColor()
+            Console.ReadKey()
+            Exit Sub
+        End If
 
         Console.ForegroundColor = ConsoleColor.Blue
         Console.WriteLine("Datos de todas las personas introducidas:")
@@ -163,31 +173,126 @@ Module Module1
                 Console.ResetColor()
             End If
             Console.WriteLine()
+
+            If i = 0 Then
+                sueldoMax = currelantes(i).SueldoCompleto
+                sueldoMin = currelantes(i).SueldoCompleto
+            Else
+                If currelantes(i).SueldoCompleto > sueldoMax Then
+                    sueldoMax = currelantes(i).SueldoCompleto
+                ElseIf currelantes(i).SueldoCompleto < sueldoMin Then
+                    sueldoMin = currelantes(i).SueldoCompleto
+                End If
+            End If
         Next
 
+        Console.WriteLine()
+        Console.ForegroundColor = ConsoleColor.Blue
+        Console.WriteLine($"Personas con el mayor salario ({sueldoMax}):")
+        Console.ResetColor()
+        Console.WriteLine()
+        For i = 0 To currelantes.Length - 1
+            If currelantes(i).SueldoCompleto = sueldoMax Then
+                Console.Write($"{i + 1} {currelantes(i).NombreCompleto} con sueldo {currelantes(i).SueldoCompleto}.")
+                If currelantes(i).Trienios > 0 Then
+                    Console.ForegroundColor = ConsoleColor.Blue
+                    Console.Write($" Tiene {currelantes(i).Trienios} trienio/s.")
+                    Console.ResetColor()
+                End If
+            End If
+        Next
+
+        Console.WriteLine()
+        Console.ForegroundColor = ConsoleColor.Blue
+        Console.WriteLine($"Personas con el menor salario ({sueldoMin}):")
+        Console.ResetColor()
+        Console.WriteLine()
+
+        For i = 0 To currelantes.Length - 1
+            If currelantes(i).SueldoCompleto = sueldoMin Then
+                Console.Write($"{i + 1} {currelantes(i).NombreCompleto} con sueldo {currelantes(i).SueldoCompleto}.")
+                If currelantes(i).Trienios > 0 Then
+                    Console.ForegroundColor = ConsoleColor.Blue
+                    Console.Write($" Tiene {currelantes(i).Trienios} trienio/s.")
+                    Console.ResetColor()
+                End If
+                Console.WriteLine()
+            End If
+        Next
         Console.ReadKey()
     End Sub
 
     Private Sub Opcion_3()
-        HayCurrelas()
+        Console.Clear()
+        Dim entrada As String
+        Dim pos As Integer = -1
 
+        If currelantes.Length = 0 Then
+            Console.ForegroundColor = ConsoleColor.Red
+            Console.Write("No has introducido datos de nadie.")
+            Console.ResetColor()
+            Console.ReadKey()
+            Exit Sub
+        End If
 
+        Console.WriteLine("Modificar Sueldo")
+
+        Do
+            Console.Write("Nombre completo: ")
+            entrada = Console.ReadLine
+
+            For i = 0 To currelantes.Length - 1
+                If currelantes(i).NombreCompleto.Equals(entrada) Then
+                    pos = i
+                End If
+            Next
+
+            If pos < 0 Then
+                Console.WriteLine()
+                Console.ForegroundColor = ConsoleColor.Red
+                Console.WriteLine($"Lo sentimos, no hay nadie con el nombre {entrada}")
+                Console.ResetColor()
+
+                Console.WriteLine("Aquí tienes una lista con los nombres de los empleados")
+
+                Console.WriteLine()
+                Console.ForegroundColor = ConsoleColor.Green
+                For i = 0 To currelantes.Length - 1
+                    Console.WriteLine($"{currelantes(i).NombreCompleto}")
+                Next
+                Console.ResetColor()
+                Console.WriteLine()
+            End If
+
+        Loop While pos < 0
+
+        Console.ForegroundColor = ConsoleColor.Green
+        Console.WriteLine($"Sueldo base {currelantes(pos).SueldoBase}. Sueldo completo {currelantes(pos).SueldoCompleto}")
+        Console.ResetColor()
+        Console.WriteLine()
+
+        Do
+            Console.Write("Porcentaje de modificación (entre 0 y 100): ")
+            entrada = Console.ReadLine
+
+            If Not (Integer.TryParse(entrada, currelantes(pos).ModSueldo) AndAlso (currelantes(pos).ModSueldo >= 0 AndAlso currelantes(pos).ModSueldo <= 100)) Then
+                Console.ForegroundColor = ConsoleColor.Red
+                Console.WriteLine("Introduce un número entre el 0 y el 100.")
+                Console.ResetColor()
+            End If
+        Loop While Not (Integer.TryParse(entrada, currelantes(pos).ModSueldo) AndAlso (currelantes(pos).ModSueldo >= 0 AndAlso currelantes(pos).ModSueldo <= 100))
+
+        currelantes(pos).AumentoSueldo()
+
+        Console.WriteLine()
+        Console.WriteLine("Después del aumento:")
+
+        Console.ForegroundColor = ConsoleColor.Green
+        Console.WriteLine($"Sueldo base {currelantes(pos).SueldoBase}. Sueldo completo {currelantes(pos).SueldoCompleto}")
+        Console.ResetColor()
         Console.ReadKey()
     End Sub
 
-    Private Sub Opcion_4()
-
-    End Sub
-
-
-    Public Function HayCurrelas()
-        If currelantes.Length = 0 Then
-            Console.ForegroundColor = ConsoleColor.Red
-            Console.WriteLine("No has introducido datos de nadie.")
-            Console.ReadKey()
-            Console.ResetColor()
-        End If
-    End Function
 End Module
 
 
