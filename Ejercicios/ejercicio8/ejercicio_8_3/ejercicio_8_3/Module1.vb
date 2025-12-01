@@ -169,7 +169,7 @@ Module Module1
         sueldoMin = currelantes(0).SueldoCompleto
 
 
-        For i = 0 To currelantes.Length - 1
+        For i = 1 To currelantes.Length - 1
             Console.Write($"{i + 1} {currelantes(i).NombreCompleto} con sueldo {currelantes(i).SueldoCompleto}.")
             If currelantes(i).Trienios > 0 Then
                 Console.ForegroundColor = ConsoleColor.Blue
