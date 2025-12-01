@@ -67,6 +67,7 @@ Module Module1
                 Console.ForegroundColor = ConsoleColor.Blue
                 Console.WriteLine(currelaAux.NombreCompleto)
                 Console.ResetColor()
+
                 If String.IsNullOrEmpty(currelaAux.NombreCompleto) Then
                     Console.ForegroundColor = ConsoleColor.Red
                     Console.WriteLine($"{ControlChars.Tab} No puedes dejar el nombre completo en blanco, vuelve a teclear datos.")
@@ -164,6 +165,10 @@ Module Module1
         Console.WriteLine("Datos de todas las personas introducidas:")
         Console.ResetColor()
 
+        sueldoMax = currelantes(0).SueldoCompleto
+        sueldoMin = currelantes(0).SueldoCompleto
+
+
         For i = 0 To currelantes.Length - 1
             Console.Write($"{i + 1} {currelantes(i).NombreCompleto} con sueldo {currelantes(i).SueldoCompleto}.")
             If currelantes(i).Trienios > 0 Then
@@ -172,16 +177,10 @@ Module Module1
                 Console.ResetColor()
             End If
             Console.WriteLine()
-
-            If i = 0 Then
+            If currelantes(i).SueldoCompleto > sueldoMax Then
                 sueldoMax = currelantes(i).SueldoCompleto
+            ElseIf currelantes(i).SueldoCompleto < sueldoMin Then
                 sueldoMin = currelantes(i).SueldoCompleto
-            Else
-                If currelantes(i).SueldoCompleto > sueldoMax Then
-                    sueldoMax = currelantes(i).SueldoCompleto
-                ElseIf currelantes(i).SueldoCompleto < sueldoMin Then
-                    sueldoMin = currelantes(i).SueldoCompleto
-                End If
             End If
         Next
 
@@ -293,6 +292,3 @@ Module Module1
     End Sub
 
 End Module
-
-
-
