@@ -137,14 +137,6 @@ Module Module1
 
         Array.Resize(currelantes, currelantes.Length + 1)
 
-        'currelantes(currelantes.Length - 1) = New Persona
-
-        'currelantes(currelantes.Length - 1).Nombre = currelaAux.Nombre
-        'currelantes(currelantes.Length - 1).Apellido1 = currelaAux.Apellido1
-        'currelantes(currelantes.Length - 1).Apellido2 = currelaAux.Apellido2
-        'currelantes(currelantes.Length - 1).Telefono = currelaAux.Telefono
-        'currelantes(currelantes.Length - 1).FechaAlta = currelaAux.FechaAlta
-        'currelantes(currelantes.Length - 1).SueldoBase = currelaAux.SueldoBase
         currelantes(currelantes.Length - 1) = currelaAux
 
     End Sub
@@ -178,9 +170,12 @@ Module Module1
                 Console.ResetColor()
             End If
             Console.WriteLine()
-            If currelantes(i).SueldoCompleto > sueldoMax Then
+
+            If i > 0 AndAlso currelantes(i).SueldoCompleto > sueldoMax Then
                 sueldoMax = currelantes(i).SueldoCompleto
-            ElseIf currelantes(i).SueldoCompleto < sueldoMin Then
+            End If
+
+            If i > 0 AndAlso currelantes(i).SueldoCompleto < sueldoMin Then
                 sueldoMin = currelantes(i).SueldoCompleto
             End If
         Next
@@ -270,20 +265,8 @@ Module Module1
         Console.ResetColor()
         Console.WriteLine()
 
-        'Do
-        '    Console.Write("Porcentaje de modificación (entre 0 y 100): ")
-        '    entrada = Console.ReadLine
-
-        '    If Not (Integer.TryParse(entrada, currelantes(pos).ModSueldo) AndAlso (currelantes(pos).ModSueldo >= 0 AndAlso currelantes(pos).ModSueldo <= 100)) Then
-        '        Console.ForegroundColor = ConsoleColor.Red
-        '        Console.WriteLine("Introduce un número entre el 0 y el 100.")
-        '        Console.ResetColor()
-        '    End If
-        'Loop While Not (Integer.TryParse(entrada, currelantes(pos).ModSueldo) AndAlso (currelantes(pos).ModSueldo >= 0 AndAlso currelantes(pos).ModSueldo <= 100))
-
-        'currelantes(pos).AumentoSueldo()
-
         Dim modificarSueldo As Integer
+
         Do
             Console.Write("Porcentaje de modificación (entre 0 y 100): ")
             entrada = Console.ReadLine

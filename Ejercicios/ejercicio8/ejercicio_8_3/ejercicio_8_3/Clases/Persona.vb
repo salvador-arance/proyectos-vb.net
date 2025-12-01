@@ -5,7 +5,6 @@
     Private _Telefono As String
     Private _FechaAlta As Date
     Private _SueldoBase As Single
-    Private _ModSueldo As Integer
 
     Public Property Nombre As String
         Get
@@ -103,6 +102,7 @@
         Get
 
             Dim años As Integer = Today.Year - _FechaAlta.Year
+
             If (_FechaAlta.Month > Today.Month OrElse (_FechaAlta.Month = Today.Month AndAlso _FechaAlta.Day > Today.Day)) Then
                 años -= 1
             End If
@@ -117,15 +117,6 @@
         End Get
     End Property
 
-
-    'Public Property ModSueldo As Integer
-    '    Set(value As Integer)
-    '        _ModSueldo = value
-    '    End Set
-    '    Get
-    '        Return _ModSueldo
-    '    End Get
-    'End Property
     Public Sub AumentoSueldo(modSueldo As Integer)
         SueldoBase += (SueldoBase * (modSueldo / 100))
     End Sub
