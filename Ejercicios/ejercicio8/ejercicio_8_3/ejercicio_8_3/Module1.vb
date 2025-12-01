@@ -144,7 +144,6 @@ Module Module1
         currelantes(currelantes.Length - 1).Telefono = currelaAux.Telefono
         currelantes(currelantes.Length - 1).FechaAlta = currelaAux.FechaAlta
         currelantes(currelantes.Length - 1).SueldoBase = currelaAux.SueldoBase
-        currelantes(currelantes.Length - 1).ModSueldo = currelaAux.ModSueldo
 
     End Sub
 
