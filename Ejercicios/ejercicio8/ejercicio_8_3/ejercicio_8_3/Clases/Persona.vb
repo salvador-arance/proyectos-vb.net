@@ -118,16 +118,16 @@
     End Property
 
 
-    Public Property ModSueldo As Integer
-        Set(value As Integer)
-            _ModSueldo = value
-        End Set
-        Get
-            Return _ModSueldo
-        End Get
-    End Property
-    Public Sub AumentoSueldo()
-        SueldoBase += (SueldoBase * (ModSueldo / 100))
+    'Public Property ModSueldo As Integer
+    '    Set(value As Integer)
+    '        _ModSueldo = value
+    '    End Set
+    '    Get
+    '        Return _ModSueldo
+    '    End Get
+    'End Property
+    Public Sub AumentoSueldo(modSueldo As Integer)
+        SueldoBase += (SueldoBase * (modSueldo / 100))
     End Sub
 
 End Class

@@ -37,7 +37,7 @@ Module Module1
         Dim currelaAux As Persona
         Dim entrada As String
 
-        currelaAux = New Persona
+
 
         Console.Clear()
 
@@ -46,7 +46,7 @@ Module Module1
             Console.WriteLine($"Introducir datos de persona número: {currelantes.Length + 1}")
 
             Console.ResetColor()
-
+            currelaAux = New Persona
             Do
                 Console.Write("Nombre de pila ........: ")
                 Console.ForegroundColor = ConsoleColor.Blue
@@ -137,14 +137,15 @@ Module Module1
 
         Array.Resize(currelantes, currelantes.Length + 1)
 
-        currelantes(currelantes.Length - 1) = New Persona
+        'currelantes(currelantes.Length - 1) = New Persona
 
-        currelantes(currelantes.Length - 1).Nombre = currelaAux.Nombre
-        currelantes(currelantes.Length - 1).Apellido1 = currelaAux.Apellido1
-        currelantes(currelantes.Length - 1).Apellido2 = currelaAux.Apellido2
-        currelantes(currelantes.Length - 1).Telefono = currelaAux.Telefono
-        currelantes(currelantes.Length - 1).FechaAlta = currelaAux.FechaAlta
-        currelantes(currelantes.Length - 1).SueldoBase = currelaAux.SueldoBase
+        'currelantes(currelantes.Length - 1).Nombre = currelaAux.Nombre
+        'currelantes(currelantes.Length - 1).Apellido1 = currelaAux.Apellido1
+        'currelantes(currelantes.Length - 1).Apellido2 = currelaAux.Apellido2
+        'currelantes(currelantes.Length - 1).Telefono = currelaAux.Telefono
+        'currelantes(currelantes.Length - 1).FechaAlta = currelaAux.FechaAlta
+        'currelantes(currelantes.Length - 1).SueldoBase = currelaAux.SueldoBase
+        currelantes(currelantes.Length - 1) = currelaAux
 
     End Sub
 
@@ -169,7 +170,7 @@ Module Module1
         sueldoMin = currelantes(0).SueldoCompleto
 
 
-        For i = 1 To currelantes.Length - 1
+        For i = 0 To currelantes.Length - 1
             Console.Write($"{i + 1} {currelantes(i).NombreCompleto} con sueldo {currelantes(i).SueldoCompleto}.")
             If currelantes(i).Trienios > 0 Then
                 Console.ForegroundColor = ConsoleColor.Blue
@@ -269,18 +270,32 @@ Module Module1
         Console.ResetColor()
         Console.WriteLine()
 
+        'Do
+        '    Console.Write("Porcentaje de modificación (entre 0 y 100): ")
+        '    entrada = Console.ReadLine
+
+        '    If Not (Integer.TryParse(entrada, currelantes(pos).ModSueldo) AndAlso (currelantes(pos).ModSueldo >= 0 AndAlso currelantes(pos).ModSueldo <= 100)) Then
+        '        Console.ForegroundColor = ConsoleColor.Red
+        '        Console.WriteLine("Introduce un número entre el 0 y el 100.")
+        '        Console.ResetColor()
+        '    End If
+        'Loop While Not (Integer.TryParse(entrada, currelantes(pos).ModSueldo) AndAlso (currelantes(pos).ModSueldo >= 0 AndAlso currelantes(pos).ModSueldo <= 100))
+
+        'currelantes(pos).AumentoSueldo()
+
+        Dim modificarSueldo As Integer
         Do
             Console.Write("Porcentaje de modificación (entre 0 y 100): ")
             entrada = Console.ReadLine
 
-            If Not (Integer.TryParse(entrada, currelantes(pos).ModSueldo) AndAlso (currelantes(pos).ModSueldo >= 0 AndAlso currelantes(pos).ModSueldo <= 100)) Then
+            If Not (Integer.TryParse(entrada, modificarSueldo) AndAlso (modificarSueldo >= 0 AndAlso modificarSueldo <= 100)) Then
                 Console.ForegroundColor = ConsoleColor.Red
                 Console.WriteLine("Introduce un número entre el 0 y el 100.")
                 Console.ResetColor()
             End If
-        Loop While Not (Integer.TryParse(entrada, currelantes(pos).ModSueldo) AndAlso (currelantes(pos).ModSueldo >= 0 AndAlso currelantes(pos).ModSueldo <= 100))
+        Loop While Not (Integer.TryParse(entrada, modificarSueldo) AndAlso (modificarSueldo >= 0 AndAlso modificarSueldo <= 100))
 
-        currelantes(pos).AumentoSueldo()
+        currelantes(pos).AumentoSueldo(modificarSueldo)
 
         Console.WriteLine()
         Console.WriteLine("Después del aumento:")
