@@ -3,6 +3,7 @@
     Private _FechaNacimiento As Date
     Private _Raza As String
     Private _TipoMascota As String
+    Private _Dueño As Persona
     Public Property Nombre As String
         Get
             Return _Nombre
@@ -39,4 +40,12 @@
         End Set
     End Property
 
+    Public Property Dueño As Persona
+        Get
+            Return _Dueño
+        End Get
+        Set(value As Persona)
+            _Dueño = value
+        End Set
+    End Property
 End Class
