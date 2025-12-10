@@ -58,6 +58,7 @@
             'TODO Terminar esto hoy en casa más tranquilo.
             If entrada = "S" Then
                 mascota = New Mascota
+
             End If
         Loop While entrada.equals("S")
     End Sub
