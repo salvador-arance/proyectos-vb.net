@@ -1,6 +1,10 @@
 ﻿Module Module1
     Sub Main()
 
+        'TODO Introducir validaciones para no repetir tanto código.
+        MostrarMensaje("hola", ConsoleColor.Red)
+        MostrarMensaje("Adios", ConsoleColor.Green)
+
         Dim persona As Persona
         Dim perMasJoven As Persona
         Dim mascota As Mascota
@@ -14,27 +18,7 @@
             Do
                 Console.Write("Nombre: ")
                 entrada = Console.ReadLine
-
-                If String.IsNullOrWhiteSpace(entrada) Then
-                    Console.ForegroundColor = ConsoleColor.Red
-                    Console.WriteLine("El nombre no puede quedarse en blanco.")
-                    Console.ResetColor()
-                Else
-                    For i = 0 To entrada.Length - 1
-                        tieneNoLetras = Not (Char.IsLetter(entrada.ElementAt(i)) OrElse Char.IsWhiteSpace(entrada.ElementAt(i)))
-                        If tieneNoLetras Then
-                            Exit For
-                        End If
-                    Next
-                    If tieneNoLetras Then
-                        Console.ForegroundColor = ConsoleColor.Red
-                        Console.WriteLine("El nombre solo puede tener letras o espacios en blanco.")
-                        Console.ResetColor()
-                    End If
-                End If
-
-
-            Loop While String.IsNullOrWhiteSpace(entrada) OrElse tieneNoLetras
+            Loop While CaracteresValidos(entrada) = False
 
             persona.Nombre = entrada
 
@@ -206,5 +190,34 @@
             Console.ResetColor()
         End If
     End Sub
+    Sub MostrarMensaje(mensaje As String, color As ConsoleColor)
+        Console.ForegroundColor = color
+        Console.WriteLine(mensaje)
+        Console.ResetColor()
+    End Sub
+    Function CaracteresValidos(palabra As String) As Boolean
+        Dim tieneNoLetras As Boolean
+        If String.IsNullOrWhiteSpace(palabra) Then
+            Console.ForegroundColor = ConsoleColor.Red
+            Console.WriteLine("El nombre no puede quedarse en blanco.")
+            Console.ResetColor()
+            Return False
+        Else
+            For i = 0 To palabra.Length - 1
+                tieneNoLetras = Not (Char.IsLetter(palabra.ElementAt(i)) OrElse Char.IsWhiteSpace(palabra.ElementAt(i)))
+                If tieneNoLetras Then
+                    Exit For
+                End If
+            Next
+            If tieneNoLetras Then
+                Console.ForegroundColor = ConsoleColor.Red
+                Console.WriteLine("El nombre solo puede tener letras o espacios en blanco.")
+                Console.ResetColor()
+                Return False
+            Else
+                Return True
+            End If
+        End If
+    End Function
 
 End Module

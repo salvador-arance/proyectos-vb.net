@@ -1,5 +1,7 @@
 ﻿Module Module1
     Dim personas() As Persona = {}
+
+    'TODO Terminar 8_4 y copiarlo aquí para luego seguir.
     Sub Main()
 
         Dim persona As Persona
@@ -205,8 +207,6 @@
             Console.WriteLine("DUEÑO: " & mascotaMasVieja.Dueño.Nombre)
             Console.ResetColor()
         End If
-
-
     End Sub
 
 End Module
