@@ -1,5 +1,4 @@
 ﻿Module Module1
-    Dim personas() As Persona = {}
     Sub Main()
 
         Dim persona As Persona
