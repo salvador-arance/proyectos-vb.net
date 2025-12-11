@@ -1,6 +1,5 @@
 ﻿Module Module1
     Dim personas() As Persona = {}
-    Dim mascotas() As Mascota = {}
     Sub Main()
 
         Dim persona As Persona
@@ -194,15 +193,19 @@
         Console.WriteLine()
         Console.ResetColor()
         Console.WriteLine("DATOS MASCOTA MÁS VIEJA")
-        Console.ForegroundColor = ConsoleColor.Blue
-        Console.WriteLine()
-        Console.WriteLine("NOMBRE: " & mascotaMasVieja.Nombre)
-        Console.WriteLine("TIPO: " & mascotaMasVieja.TipoMascota)
-        Console.WriteLine("RAZA: " & mascotaMasVieja.Raza)
-        Console.WriteLine("FECHA NACIMIENTO: " & mascotaMasVieja.FechaNacimiento)
-        Console.WriteLine("DUEÑO: " & mascotaMasVieja.Dueño.Nombre)
-        Console.ResetColor()
 
+        If IsNothing(mascotaMasVieja) Then
+            Console.WriteLine("NADIE TIENE MASCOTAS")
+        Else
+            Console.ForegroundColor = ConsoleColor.Blue
+            Console.WriteLine()
+            Console.WriteLine("NOMBRE: " & mascotaMasVieja.Nombre)
+            Console.WriteLine("TIPO: " & mascotaMasVieja.TipoMascota)
+            Console.WriteLine("RAZA: " & mascotaMasVieja.Raza)
+            Console.WriteLine("FECHA NACIMIENTO: " & mascotaMasVieja.FechaNacimiento)
+            Console.WriteLine("DUEÑO: " & mascotaMasVieja.Dueño.Nombre)
+            Console.ResetColor()
+        End If
     End Sub
 
 End Module
