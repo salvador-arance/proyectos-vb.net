@@ -72,6 +72,7 @@
     <Compile Include="Clases\Mascota.vb" />
     <Compile Include="Clases\Persona.vb" />
     <Compile Include="Module1.vb" />
+    <Compile Include="Module2.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

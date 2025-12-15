@@ -144,7 +144,6 @@
                         mascotaMasVieja = mascota
                     End If
                 End If
-
                 persona.SuMascota = mascota
                 mascota.Dueño = persona
             End If
