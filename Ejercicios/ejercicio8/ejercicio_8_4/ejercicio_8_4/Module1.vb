@@ -70,7 +70,6 @@
             MostrarMensaje("No hay mascotas", ConsoleColor.DarkGray)
         End If
     End Sub
-
     Sub MostrarMensaje(mensaje As String, color As ConsoleColor)
         Console.ForegroundColor = color
         If color = ConsoleColor.White Then
@@ -80,7 +79,16 @@
         End If
         Console.ResetColor()
     End Sub
-
+    Sub ActualizarPersonaMasJoven(per As Persona)
+        If IsNothing(_perMasJoven) OrElse per.FechaNacimiento > _perMasJoven.FechaNacimiento Then
+            _perMasJoven = per
+        End If
+    End Sub
+    Sub ActualizarMascotaMasVieja(masc As Mascota)
+        If IsNothing(_mascotaMasVieja) OrElse masc.FechaNacimiento < _mascotaMasVieja.FechaNacimiento Then
+            _mascotaMasVieja = masc
+        End If
+    End Sub
     Function PedirTexto(mensaje As String) As String
         Dim entrada As String
         Do
@@ -89,7 +97,6 @@
         Loop While CaracteresValidos(entrada) = False
         Return entrada
     End Function
-
     Function CaracteresValidos(palabra As String) As Boolean
         Dim tieneNoLetras As Boolean
         If String.IsNullOrWhiteSpace(palabra) Then
@@ -110,7 +117,6 @@
             End If
         End If
     End Function
-
     Function FechaNacimientoValida(fecha As String) As Boolean
         Dim fechaAux As Date
         If Not Date.TryParse(fecha, fechaAux) OrElse fechaAux > Today Then
@@ -120,22 +126,7 @@
             Return True
         End If
     End Function
-
     Function SioNo(respuesta As String) As Boolean
         Return respuesta = "S" OrElse respuesta = "N"
-    End Function
-
-    Function ActualizarPersonaMasJoven(per As Persona) As Persona
-        If IsNothing(_perMasJoven) OrElse per.FechaNacimiento > _perMasJoven.FechaNacimiento Then
-            _perMasJoven = per
-        End If
-        Return _perMasJoven
-    End Function
-
-    Function ActualizarMascotaMasVieja(masc As Mascota) As Mascota
-        If IsNothing(_mascotaMasVieja) OrElse masc.FechaNacimiento < _mascotaMasVieja.FechaNacimiento Then
-            _mascotaMasVieja = masc
-        End If
-        Return _mascotaMasVieja
     End Function
 End Module
