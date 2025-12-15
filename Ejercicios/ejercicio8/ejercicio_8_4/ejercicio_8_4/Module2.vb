@@ -15,13 +15,12 @@
                 MostrarMensaje("Fecha de nacimiento: ", ConsoleColor.White)
                 entrada = Console.ReadLine
             Loop While FechaNacimientoValida(entrada) = True
-            persona.FechaNacimiento
-            Date.TryParse(entrada, persona.FechaNacimiento)
+            persona.FechaNacimiento = Date.Parse(entrada)
 
             PersonaMasJoven(persona)
 
             Do
-                MostrarMensaje("¿Tiene mascota (S/N)?: ")
+                MostrarMensaje("¿Tiene mascota (S/N)?: ", ConsoleColor.White)
                 entrada = Console.ReadLine().ToUpper
             Loop While SioNo(entrada) = False
 
@@ -56,7 +55,7 @@
                 MascotaMasVieja(mascota)
             End If
 
-            MostrarMensaje("¿Otra persona? (S/N)")
+            MostrarMensaje("¿Otra persona? (S/N)", ConsoleColor.White)
         Loop
     End Sub
 
@@ -98,24 +97,24 @@
     End Function
 
     Function SioNo(respuesta As String) As Boolean
-        If respuesta <> "S" AndAlso entrada <> "N" Then
+        If respuesta <> "S" AndAlso respuesta <> "N" Then
             MostrarMensaje("Introduce S o N", ConsoleColor.Red)
-            Return = False
+            Return False
         Else
-            Return = True
+            Return True
         End If
     End Function
 
     Function TieneMascota(respuesta As String) As Boolean
         If respuesta = "S" Then
-            Return = True
+            Return True
         Else
-            Return = False
+            Return False
         End If
     End Function
 
     Function PersonaMasJoven(per As Persona) As Persona
-        Private _PersonaMasJoven As Persona
+        Dim _PersonaMasJoven As Persona
         If IsNothing(PersonaMasJoven) OrElse per.FechaNacimiento > _PersonaMasJoven.FechaNacimiento Then
             _PersonaMasJoven = per
         End If
@@ -123,7 +122,7 @@
     End Function
 
     Function MascotaMasVieja(masc As Mascota) As Mascota
-        Private _MascotaMasVieja As Persona
+        Dim _MascotaMasVieja As Mascota
         If IsNothing(_MascotaMasVieja) OrElse masc.FechaNacimiento < _MascotaMasVieja.FechaNacimiento Then
             _MascotaMasVieja = masc
         End If
