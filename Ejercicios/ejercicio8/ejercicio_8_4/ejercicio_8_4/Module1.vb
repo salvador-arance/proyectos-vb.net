@@ -61,11 +61,11 @@
         Loop While entrada = "S"
 
         MostrarMensaje("Datos de la persona más joven", ConsoleColor.Cyan)
-        MostrarMensaje($"Persona más joven: {_perMasJoven.Nombre} {vbCrLf} Fecha de nacimiento: {_perMasJoven.FechaNacimiento.ToString}", ConsoleColor.Blue)
+        MostrarMensaje($"Persona más joven: {_perMasJoven.Nombre} {vbCrLf} Fecha de nacimiento: {_perMasJoven.FechaNacimiento.ToLongDateString}", ConsoleColor.Blue)
 
         If Not IsNothing(_mascotaMasVieja) Then
             MostrarMensaje("Datos de la mascota más vieja", ConsoleColor.Cyan)
-            MostrarMensaje($"Mascota más vieja: {_mascotaMasVieja.Nombre} {vbCrLf} Tipo: {_mascotaMasVieja.TipoMascota} {vbCrLf} Raza: {_mascotaMasVieja.Raza} {vbCrLf} Fecha de Nacimiento: {_mascotaMasVieja.FechaNacimiento.ToString} {vbCrLf} Dueño: {_mascotaMasVieja.Dueño.Nombre}", ConsoleColor.Blue)
+            MostrarMensaje($"Mascota más vieja: {_mascotaMasVieja.Nombre} {vbCrLf} Tipo: {_mascotaMasVieja.TipoMascota} {vbCrLf} Raza: {_mascotaMasVieja.Raza} {vbCrLf} Fecha de Nacimiento: {_mascotaMasVieja.FechaNacimiento.ToLongDateString} {vbCrLf} Dueño: {_mascotaMasVieja.Dueño.Nombre}", ConsoleColor.Blue)
         Else
             MostrarMensaje("No hay mascotas", ConsoleColor.DarkGray)
         End If
