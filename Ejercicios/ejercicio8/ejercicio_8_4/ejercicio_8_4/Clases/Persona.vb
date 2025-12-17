@@ -1,15 +1,15 @@
 ﻿Public Class Persona
-    Private _Nombre As String
+    'Private _Nombre As String
     Private _FechaNacimiento As Date
     Private _SuMascota As Mascota
     Public Property Nombre As String
-        Get
-            Return _Nombre
-        End Get
-        Set(value As String)
-            _Nombre = value
-        End Set
-    End Property
+    '    Get
+    '        Return _Nombre
+    '    End Get
+    '    Set(value As String)
+    '        _Nombre = value
+    '    End Set
+    'End Property
 
     Public Property FechaNacimiento As Date
         Get

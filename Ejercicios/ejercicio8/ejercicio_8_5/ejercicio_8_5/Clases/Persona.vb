@@ -1,7 +1,8 @@
 ﻿Public Class Persona
     Private _Nombre As String
     Private _FechaNacimiento As Date
-    Private _SuMascota As Mascota
+    Private _Mascotas() As Mascota
+
     Public Property Nombre As String
         Get
             Return _Nombre
@@ -20,12 +21,12 @@
         End Set
     End Property
 
-    Public Property SuMascota As Mascota
+    Public Property Mascotas As Mascota()
         Get
-            Return _SuMascota
+            Return _Mascotas
         End Get
-        Set(value As Mascota)
-            _SuMascota = value
+        Set(value As Mascota())
+            _Mascotas = value
         End Set
     End Property
 End Class
