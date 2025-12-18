@@ -1,7 +1,7 @@
 ﻿Module Module1
     Private personas As Persona() = {}
-    Private _perMasJoven As Persona
-    Private _mascotaMasVieja As Mascota
+    Private perMasJoven As Persona
+    Private mascotaMasVieja As Mascota
 
     Sub Main()
         Dim entrada As String
@@ -15,9 +15,9 @@
             ActualizarPersonaMasJoven(personas(indiceActualPersonas))
             entrada = PedirSioNo("¿Tiene mascota (S/N)?: ")
             If entrada = "S" Then
-                Dim nMascotas As Integer = PedirNumero("¿Cuántas mascotas tienes? (>1 y <10): ")
-                Array.Resize(personas(indiceActualPersonas).Mascotas, nMascotas)
-                For i = 0 To nMascotas - 1
+                Dim numeroMascotas As Integer = PedirNumero("¿Cuántas mascotas tienes? (>1 y <10): ")
+                Array.Resize(personas(indiceActualPersonas).Mascotas, numeroMascotas)
+                For i = 0 To numeroMascotas - 1
                     personas(indiceActualPersonas).Mascotas(i) = New Mascota
                     MostrarMensaje("DATOS DE SU MASCOTA", ConsoleColor.Blue)
                     personas(indiceActualPersonas).Mascotas(i).Nombre = PedirTexto("Nombre: ")
@@ -44,13 +44,13 @@
         Console.ResetColor()
     End Sub
     Sub ActualizarPersonaMasJoven(per As Persona)
-        If IsNothing(_perMasJoven) OrElse per.FechaNacimiento > _perMasJoven.FechaNacimiento Then
-            _perMasJoven = per
+        If IsNothing(perMasJoven) OrElse per.FechaNacimiento > perMasJoven.FechaNacimiento Then
+            perMasJoven = per
         End If
     End Sub
-    Sub ActualizarMascotaMasVieja(masc As Mascota)
-        If IsNothing(_mascotaMasVieja) OrElse masc.FechaNacimiento < _mascotaMasVieja.FechaNacimiento Then
-            _mascotaMasVieja = masc
+    Sub ActualizarMascotaMasVieja(mascota As Mascota)
+        If IsNothing(mascotaMasVieja) OrElse mascota.FechaNacimiento < mascotaMasVieja.FechaNacimiento Then
+            mascotaMasVieja = mascota
         End If
     End Sub
     Sub ImprimirDatosPersonas()
@@ -68,21 +68,21 @@
     End Sub
     Sub ImprimirDatosPersonaJoven()
         MostrarMensaje("Datos de la persona más joven", ConsoleColor.Cyan)
-        MostrarMensaje($"Persona más joven: {_perMasJoven.Nombre} {ControlChars.NewLine} Fecha de nacimiento: {_perMasJoven.FechaNacimiento.ToLongDateString}", ConsoleColor.Blue)
+        MostrarMensaje($"Persona más joven: {perMasJoven.Nombre} {ControlChars.NewLine} Fecha de nacimiento: {perMasJoven.FechaNacimiento.ToLongDateString}", ConsoleColor.Blue)
 
-        If _perMasJoven.Mascotas Is Nothing Then
+        If perMasJoven.Mascotas Is Nothing Then
             MostrarMensaje("No tiene mascota.", ConsoleColor.Blue)
         Else
-            For i = 0 To _perMasJoven.Mascotas().Length - 1
-                MostrarMensaje($"Mascota: {_perMasJoven.Mascotas(i).Nombre} {vbCrLf} Tipo: {_perMasJoven.Mascotas(i).TipoMascota} {vbCrLf} Raza: {_perMasJoven.Mascotas(i).Raza} {vbCrLf} Fecha de Nacimiento: {_perMasJoven.Mascotas(i).FechaNacimiento.ToLongDateString}", ConsoleColor.Blue)
+            For i = 0 To perMasJoven.Mascotas().Length - 1
+                MostrarMensaje($"Mascota: {perMasJoven.Mascotas(i).Nombre} {vbCrLf} Tipo: {perMasJoven.Mascotas(i).TipoMascota} {vbCrLf} Raza: {perMasJoven.Mascotas(i).Raza} {vbCrLf} Fecha de Nacimiento: {perMasJoven.Mascotas(i).FechaNacimiento.ToLongDateString}", ConsoleColor.Blue)
             Next
 
         End If
     End Sub
     Sub ImprimirDatosMascota()
-        If Not IsNothing(_mascotaMasVieja) Then
+        If Not IsNothing(mascotaMasVieja) Then
             MostrarMensaje("Datos de la mascota más vieja", ConsoleColor.Cyan)
-            MostrarMensaje($"Mascota más vieja: {_mascotaMasVieja.Nombre} {vbCrLf} Tipo: {_mascotaMasVieja.TipoMascota} {vbCrLf} Raza: {_mascotaMasVieja.Raza} {vbCrLf} Fecha de Nacimiento: {_mascotaMasVieja.FechaNacimiento.ToLongDateString} {vbCrLf} Dueño: {BuscarDueño()}", ConsoleColor.Blue)
+            MostrarMensaje($"Mascota más vieja: {mascotaMasVieja.Nombre} {vbCrLf} Tipo: {mascotaMasVieja.TipoMascota} {vbCrLf} Raza: {mascotaMasVieja.Raza} {vbCrLf} Fecha de Nacimiento: {mascotaMasVieja.FechaNacimiento.ToLongDateString} {vbCrLf} Dueño: {BuscarDueño()}", ConsoleColor.Blue)
 
         Else
             MostrarMensaje("No hay mascotas", ConsoleColor.Blue)
@@ -92,7 +92,7 @@
         For i = 0 To personas.Length - 1
             If personas(i).Mascotas IsNot Nothing Then
                 For j = 0 To personas(i).Mascotas.Length - 1
-                    If personas(i).Mascotas(j) Is _mascotaMasVieja Then
+                    If personas(i).Mascotas(j) Is mascotaMasVieja Then
                         Return personas(i).Nombre
                     End If
                 Next
@@ -153,14 +153,14 @@
     End Function
     Function PedirNumero(mensaje As String)
         Dim entrada As String
-        Dim nMasc As Byte
+        Dim numeroMascotas As Byte
         Do
             MostrarMensaje(mensaje, ConsoleColor.White)
             entrada = Console.ReadLine
-            If Not Byte.TryParse(entrada, nMasc) OrElse (nMasc < 1 OrElse nMasc >= 10) Then
+            If Not Byte.TryParse(entrada, numeroMascotas) OrElse (numeroMascotas < 1 OrElse numeroMascotas >= 10) Then
                 MostrarMensaje("No has introducido un número de mascotas válido", ConsoleColor.Red)
             End If
-        Loop While Not Byte.TryParse(entrada, nMasc) OrElse (nMasc < 1 OrElse nMasc >= 10)
-        Return nMasc
+        Loop While Not Byte.TryParse(entrada, numeroMascotas) OrElse (numeroMascotas < 1 OrElse numeroMascotas >= 10)
+        Return numeroMascotas
     End Function
 End Module
