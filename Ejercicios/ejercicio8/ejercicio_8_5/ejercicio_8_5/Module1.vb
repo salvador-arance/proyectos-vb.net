@@ -1,6 +1,5 @@
 ﻿Module Module1
     Private personas As Persona() = {}
-    Private mascota As Mascota
     Private _perMasJoven As Persona
     Private _mascotaMasVieja As Mascota
 
@@ -158,10 +157,10 @@
         Do
             MostrarMensaje(mensaje, ConsoleColor.White)
             entrada = Console.ReadLine
-            If Not Byte.TryParse(entrada, nMasc) OrElse nMasc >= 10 Then
+            If Not Byte.TryParse(entrada, nMasc) OrElse (nMasc < 1 OrElse nMasc >= 10) Then
                 MostrarMensaje("No has introducido un número de mascotas válido", ConsoleColor.Red)
             End If
-        Loop While Not Byte.TryParse(entrada, nMasc) OrElse nMasc >= 10
+        Loop While Not Byte.TryParse(entrada, nMasc) OrElse (nMasc < 1 OrElse nMasc >= 10)
         Return nMasc
     End Function
 End Module
