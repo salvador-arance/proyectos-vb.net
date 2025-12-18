@@ -11,6 +11,7 @@
         Do
 
             Do
+                Dim int As Integer = arrayNombres.Length
                 Array.Resize(arrayNombres, contador + 1)
                 Console.Write($"Introduce el {contador + 1}º Nombre <Apellido1, Nombre>: ")
                 entrada = Console.ReadLine()
