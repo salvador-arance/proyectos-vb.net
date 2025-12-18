@@ -86,7 +86,7 @@
             MostrarMensaje($"Mascota más vieja: {_mascotaMasVieja.Nombre} {vbCrLf} Tipo: {_mascotaMasVieja.TipoMascota} {vbCrLf} Raza: {_mascotaMasVieja.Raza} {vbCrLf} Fecha de Nacimiento: {_mascotaMasVieja.FechaNacimiento.ToLongDateString} {vbCrLf} Dueño: {BuscarDueño()}", ConsoleColor.Blue)
 
         Else
-            MostrarMensaje("No hay mascotas", ConsoleColor.DarkGray)
+            MostrarMensaje("No hay mascotas", ConsoleColor.Blue)
         End If
     End Sub
     Function BuscarDueño() As String
